@@ -2,13 +2,13 @@ from random import randint
 
 
 class Matrix:
-    def __init__(self, _my_list, _n, _m):
+    def __init__(self, my_list, n, m):
         """
         принимает список списков
         """
-        self._my_list = _my_list
-        self._n = _n
-        self._m = _m
+        self._my_list = my_list
+        self._n = n
+        self._m = m
 
     def __str__(self):
         """
@@ -36,14 +36,15 @@ class Matrix:
         c = []
         i = 0
         while i < len(m1):
-            la = len(m1[i])
-            lb = len(m2[i])
             for _x, _y in zip(m1[i], m2[i]):
                 c += [int(_x) + int(_y)]
-            if la > lb:
-                c += m1[la - lb + 1:]
-            elif la < lb:
-                c += m2[lb - la + 1:]
+            # сложение с разными сторонами
+            # la = len(m1[i])
+            # lb = len(m2[i])
+            # if la > lb:
+            #     c += m1[la - lb + 1:]
+            # elif la < lb:
+            #     c += m2[lb - la + 1:]
             m3.append(c)
             c = []
             i += 1
@@ -63,13 +64,13 @@ def ans_check(_str):
 
 
 # я вводил эту функцию как метод класса Matrix и всё работало, но показалось что пока лучше вынести
-def matrix_create_random(_n, _m, _x):
-    _temp = [list() * _n for _i in range(0, _m)]
-    for row in range(0, _n):
-        for elem in range(0, _m):
-            _temp[elem].append(randint(0, _x))
-    _temp = Matrix(_temp, _n, _m)
-    return _temp
+def matrix_create_random(n, m, x):
+    temp = [list() * n for i in range(0, m)]
+    for row in range(0, n):
+        for elem in range(0, m):
+            temp[elem].append(randint(0, x))
+    _temp = Matrix(temp, n, m)
+    return temp
 
 
 def not_int_check(arg_1):
@@ -100,14 +101,14 @@ print("Введите 1 или 2, где:\n"
       "2: ручной ввод двух матриц")
 x = ans_check("ваш выбор")
 if x == 1:
-    n = ans_check("Введите количество цифр в строку матрицы")
-    m = ans_check("Введите количество строк матрицы")
+    n = ans_check("Введите размер матрицы n*n")
+    m = n
     x = ans_check("Введите максимальное число для элемента генерируемой матрицы")
     my_list_1 = Matrix(matrix_create_random(n, m, x), n, m)
     my_list_2 = Matrix(matrix_create_random(n, m, x), n, m)
 elif x == 2:
-    n = ans_check("Введите количество строк в вашей матрице")
-    m = ans_check("Количество цифр на строку в матрице")
+    n = ans_check("Введите размер матрицы n*n")
+    m = n
     my_list_1 = []
     my_list_2 = []
     for el in range(n):

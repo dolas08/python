@@ -13,7 +13,8 @@ class Cell:
         разность двух клеток
         """
         if self.cell_amount - other.cell_amount < 0:
-            return "разность двух клеток меньше нуля"
+            print("разность клеток меньше ноля")
+            raise Exception
         else:
             return Cell(self.cell_amount - other.cell_amount)
 
@@ -39,18 +40,14 @@ class Cell:
         :param x: разграничитель ячеек в клетке
         :return: "отсортированная" строка s
         """
-        s = ''
+        s = []
         j = 1
         for i in range(self.cell_amount):
-            s += '*'
-            # добавляем в строку * на весь range
-            if i+1 == x * j and self.cell_amount - i - x >= 0:
-                # если следующее i будет равно пределу на котором нужно перевести строку
-                # (i+1 из-за того что отсчёт начинается с 0)
-                # и у нас остались ячейки как минимум на эту строку
-                s += '\n'
+            s.append('*')
+            if x * j == i + 1:
+                s.append('\n')
                 j += 1
-        return s
+        return ''.join(s)
 
 
 def ans_check(_str="Ваш выбор"):
