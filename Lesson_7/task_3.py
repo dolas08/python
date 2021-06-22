@@ -13,8 +13,7 @@ class Cell:
         разность двух клеток
         """
         if self.cell_amount - other.cell_amount < 0:
-            print("разность клеток меньше ноля")
-            raise Exception
+            raise ValueError("разность клеток меньше ноля")
         else:
             return Cell(self.cell_amount - other.cell_amount)
 
