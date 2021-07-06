@@ -1,48 +1,20 @@
 class Warehouse:
-    # warehouse = {
-    # key == class_name == f"{class}"?
-    # Key = f"{class}"[s.rfind('.')+1:-2]
-    # value == [class,class,class .. class]
-    # }"
-    # количество = len(value)
-    #
-    # What class should include?
-    # class.name = string
-    # class.amount = ? считать количество одинаковых моделей принтеров ?
-    # stats?
     def __init__(self, my_class):
         self.a = f"{type(my_class)}"[f"{type(my_class)}".rfind('.') + 1:-2]
         _temp = [my_class]
         self.warehouse = dict()
-        # print(my_class)
-        # print(_temp)
-        # temp_dict = dict.fromkeys([self.a], _temp)
-        # print(temp_dict)
         if my_class != 0:
             self.warehouse.update(dict.fromkeys([self.a], _temp))
 
     def __str__(self):
         return f"{self.warehouse}"
 
-    # если в в warehouse уже есть такой ключ
-    # то достать значение == список
-    # присоединить старый список к тому, что пришёл
-    #
-    # if self.warehouse.get(self.x[0]) is not None:
-    #
-    #     self.x[1] += self.warehouse.get(self.x[0])
-    #     temp = self.x.pop(1)
-    #     self.warehouse.update(dict.fromkeys(self.x, temp))
-    # else:
-    #     temp = self.x.pop(1)
-    #     self.warehouse.update(dict.fromkeys(self.x, temp))
     def append(self, x):
         _temp = []
         _a = f"{type(x)}"[f"{type(x)}".rfind('.') + 1:-2]
         if self.warehouse.get(_a) is not None:
             _temp = self.warehouse.pop(_a)
             _temp.append(x)
-            # print(_temp)
             self.warehouse.update(dict.fromkeys([_a], _temp))
 
         else:
@@ -63,6 +35,8 @@ class Warehouse:
                             f"{type(_temp_list[z])}".rfind('.') + 1:-2] + f" будем отдавать (в шт)?")
         y = int(input("Ваш выбор: "))
         if _temp_list[x].show_amount() - y >= 0:
+            _a = Scan(_temp_list[z].show_name(), y)
+            other.append(_a)
             _temp_list[x] - y
         else:
             print("\033[31m {}".format("!!!У вас нет столько предметов!!!"), end='')
@@ -100,6 +74,9 @@ class OfficeEquipment:
 
     def show_amount(self):
         return self.amount
+
+    def show_name(self):
+        return self.name
 
 
 class Printer(OfficeEquipment):
